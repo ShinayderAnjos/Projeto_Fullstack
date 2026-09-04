@@ -1,10 +1,21 @@
 package br.ueg.trindade.shinayder_projeto_fullstack;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Jogo {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
 	private String descricao;
+
+	public Jogo() {
+	}
 
 	public Jogo(Long id, String nome, String descricao) {
 		this.id = id;
