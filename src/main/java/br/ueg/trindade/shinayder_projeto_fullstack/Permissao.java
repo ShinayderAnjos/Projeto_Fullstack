@@ -6,6 +6,12 @@ public class Permissao {
 	private String nome;
 	private String descricao;
 
+	public Permissao(Long id, String nome, String descricao) {
+		this.id = id;
+		this.nome = nome;
+		this.descricao = descricao;
+	}
+
 	public Long getId() {
 		return id;
 	}

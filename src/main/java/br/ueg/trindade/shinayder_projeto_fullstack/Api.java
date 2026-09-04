@@ -10,12 +10,16 @@ public class Api {
 
 	@GetMapping("/permissoes")
 	public List<Permissao> permissoes() {
-		return List.of();
+		return List.of(
+				new Permissao(1L, "Administrador", "Acesso completo ao sistema"),
+				new Permissao(2L, "Usuario", "Acesso basico ao sistema"));
 	}
 
 	@GetMapping("/jogos")
 	public List<Jogo> jogos() {
-		return List.of();
+		return List.of(
+				new Jogo(1L, "Roleta", "Jogo de roleta com fichas virtuais"),
+				new Jogo(2L, "Caca-niquel", "Jogo de caca-niquel com fichas virtuais"));
 	}
 
 }
