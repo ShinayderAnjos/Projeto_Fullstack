@@ -1,10 +1,16 @@
 package br.ueg.trindade.shinayder_projeto_fullstack.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashSet;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Usuario {
@@ -13,9 +19,16 @@ public class Usuario {
 	private Long id;
 	private String nome;
 	private String username;
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@JsonIgnore
 	private String senha;
 	private String email;
+
+	@ManyToMany
+	@JoinTable(
+			name = "usuario_permissao",
+			joinColumns = @JoinColumn(name = "usuario_id"),
+			inverseJoinColumns = @JoinColumn(name = "permissao_id"))
+	private Set<Permissao> permissoes = new HashSet<>();
 
 	public Usuario() {}
 
@@ -29,4 +42,6 @@ public class Usuario {
 	public void setSenha(String senha) { this.senha = senha; }
 	public String getEmail() { return email; }
 	public void setEmail(String email) { this.email = email; }
+	public Set<Permissao> getPermissoes() { return permissoes; }
+	public void setPermissoes(Set<Permissao> permissoes) { this.permissoes = permissoes; }
 }
