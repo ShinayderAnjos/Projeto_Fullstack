@@ -9,6 +9,11 @@ export default function PermissoesPage() {
   const carregar = () => api.get<Permissao[]>("/permissoes").then(r => setItens(r.data));
   useEffect(() => { carregar(); }, []);
   const salvar = async (item: Permissao) => { if (item.id) await api.put(`/permissoes/${item.id}`, item); else await api.post("/permissoes", item); setEdicao(null); carregar(); };
-  const excluir = async (id: number) => { await api.delete(`/permissoes/${id}`); carregar(); };
+  const excluir = async (id: number) => {
+    if (window.confirm("Deseja realmente excluir esta permissão?")) {
+      await api.delete(`/permissoes/${id}`);
+      carregar();
+    }
+  };
   return <section><h2>Permissões</h2><PermissaoForm permissao={edicao} onSalvar={salvar} onCancelar={() => setEdicao(null)} /><PermissaoList permissoes={itens} onEditar={setEdicao} onExcluir={excluir} /></section>;
 }

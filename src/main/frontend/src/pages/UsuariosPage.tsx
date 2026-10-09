@@ -9,6 +9,11 @@ export default function UsuariosPage() {
   const carregar = () => api.get<Usuario[]>("/usuarios").then(r => setItens(r.data));
   useEffect(() => { carregar(); }, []);
   const salvar = async (item: Usuario) => { if (item.id) await api.put(`/usuarios/${item.id}`, item); else await api.post("/usuarios", item); setEdicao(null); carregar(); };
-  const excluir = async (id: number) => { await api.delete(`/usuarios/${id}`); carregar(); };
+  const excluir = async (id: number) => {
+    if (window.confirm("Deseja realmente excluir este usuário?")) {
+      await api.delete(`/usuarios/${id}`);
+      carregar();
+    }
+  };
   return <section><h2>Usuários</h2><UsuarioForm usuario={edicao} onSalvar={salvar} onCancelar={() => setEdicao(null)} /><UsuarioList usuarios={itens} onEditar={setEdicao} onExcluir={excluir} /></section>;
 }

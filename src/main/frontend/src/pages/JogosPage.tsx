@@ -9,6 +9,11 @@ export default function JogosPage() {
   const carregar = () => api.get<Jogo[]>("/jogos").then(r => setItens(r.data));
   useEffect(() => { carregar(); }, []);
   const salvar = async (item: Jogo) => { if (item.id) await api.put(`/jogos/${item.id}`, item); else await api.post("/jogos", item); setEdicao(null); carregar(); };
-  const excluir = async (id: number) => { await api.delete(`/jogos/${id}`); carregar(); };
+  const excluir = async (id: number) => {
+    if (window.confirm("Deseja realmente excluir este jogo?")) {
+      await api.delete(`/jogos/${id}`);
+      carregar();
+    }
+  };
   return <section><h2>Jogos</h2><JogoForm jogo={edicao} onSalvar={salvar} onCancelar={() => setEdicao(null)} /><JogoList jogos={itens} onEditar={setEdicao} onExcluir={excluir} /></section>;
 }
