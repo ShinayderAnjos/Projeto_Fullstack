@@ -15,5 +15,5 @@ export default function PermissoesPage() {
       carregar();
     }
   };
-  return <section><h2>Permissões</h2><PermissaoForm permissao={edicao} onSalvar={salvar} onCancelar={() => setEdicao(null)} /><PermissaoList permissoes={itens} onEditar={setEdicao} onExcluir={excluir} /></section>;
+  return <section><h1 className="mb-4 text-2xl font-bold text-gray-800">Permissões</h1><PermissaoForm permissao={edicao} onSalvar={salvar} onCancelar={() => setEdicao(null)} /><PermissaoList permissoes={itens} onEditar={setEdicao} onExcluir={excluir} /></section>;
 }

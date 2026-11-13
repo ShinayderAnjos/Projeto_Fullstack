@@ -15,5 +15,5 @@ export default function JogosPage() {
       carregar();
     }
   };
-  return <section><h2>Jogos</h2><JogoForm jogo={edicao} onSalvar={salvar} onCancelar={() => setEdicao(null)} /><JogoList jogos={itens} onEditar={setEdicao} onExcluir={excluir} /></section>;
+  return <section><h1 className="mb-4 text-2xl font-bold text-gray-800">Jogos</h1><JogoForm jogo={edicao} onSalvar={salvar} onCancelar={() => setEdicao(null)} /><JogoList jogos={itens} onEditar={setEdicao} onExcluir={excluir} /></section>;
 }

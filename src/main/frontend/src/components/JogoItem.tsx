@@ -1,3 +1,4 @@
 import type { Jogo } from "../types/Jogo";
+import Botao from "./Botao";
 interface Props { jogo: Jogo; onEditar: (item: Jogo) => void; onExcluir: (id: number) => void; }
-export default function JogoItem({ jogo, onEditar, onExcluir }: Props) { return <li><div><strong>{jogo.nome}</strong><span>{jogo.descricao}</span></div><div className="acoes"><button onClick={() => onEditar(jogo)}>Editar</button><button className="excluir" onClick={() => onExcluir(jogo.id!)}>Excluir</button></div></li>; }
+export default function JogoItem({ jogo, onEditar, onExcluir }: Props) { return <li className="flex items-center justify-between p-4"><div><strong>{jogo.nome}</strong><span className="ml-2 text-gray-500">{jogo.descricao}</span></div><div className="flex gap-2"><Botao variante="neutro" onClick={() => onEditar(jogo)}>Editar</Botao><Botao variante="perigo" onClick={() => onExcluir(jogo.id!)}>Excluir</Botao></div></li>; }

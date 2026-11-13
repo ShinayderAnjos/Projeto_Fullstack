@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../services/api";
 import type { Usuario } from "../types/Usuario";
 import type { Permissao } from "../types/Permissao";
+import Botao from "../components/Botao";
 
 function UsuarioPermissoesPage() {
   const [usuarios, setUsuarios] = useState<Usuario[]>([]);
@@ -36,11 +37,12 @@ function UsuarioPermissoesPage() {
   }
 
   return (
-    <div>
-      <h1>Atribuir Permissões</h1>
+    <div className="rounded-lg bg-white p-6 shadow">
+      <h1 className="mb-4 text-2xl font-bold text-gray-800">Atribuir Permissões</h1>
 
-      <label>Usuário:</label>
+      <label className="mb-1 block text-sm font-medium text-gray-700">Usuário</label>
       <select
+        className="mb-4 w-full rounded-md border border-gray-300 px-3 py-2"
         value={usuarioId ?? ""}
         onChange={(e) => selecionarUsuario(Number(e.target.value))}
       >
@@ -52,23 +54,23 @@ function UsuarioPermissoesPage() {
         ))}
       </select>
 
-      <fieldset>
-        <legend>Permissões</legend>
+      <fieldset className="mb-4 rounded-md border border-gray-300 p-4">
+        <legend className="px-2 text-sm font-medium text-gray-700">Permissões</legend>
         {permissoes.map((p) => (
-          <label key={p.id}>
+          <label key={p.id} className="flex items-center gap-2 py-1">
             <input
               type="checkbox"
               checked={idsSelecionados.includes(p.id!)}
               onChange={() => alternarPermissao(p.id!)}
             />
-            {p.nome} - {p.descricao}
+            <span><strong>{p.nome}</strong> — {p.descricao}</span>
           </label>
         ))}
       </fieldset>
 
-      <button onClick={salvar} disabled={usuarioId === null}>
+      <Botao onClick={salvar} disabled={usuarioId === null}>
         Salvar permissões
-      </button>
+      </Botao>
     </div>
   );
 }
