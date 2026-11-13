@@ -7,4 +7,5 @@ public interface InscricaoRepository extends JpaRepository<Inscricao, Long> {
 	boolean existsByTorneioId(Long torneioId);
 	boolean existsByEmailAndTorneioId(String email, Long torneioId);
 	boolean existsByEmailAndTorneioIdAndIdNot(String email, Long torneioId, Long id);
+	boolean existsByUsernameAndTorneioId(String username, Long torneioId);
 }

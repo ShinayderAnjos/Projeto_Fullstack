@@ -21,7 +21,7 @@ function InscricoesPage() {
       if (item.id) await api.put(`/inscricoes/${item.id}`, item); else await api.post("/inscricoes", item);
       setEdicao(null);
       if (administrador) carregar(); else alert("Inscrição realizada com sucesso!");
-    } catch { alert("Este e-mail já está inscrito no torneio."); }
+    } catch { alert("Você já está inscrito neste torneio."); }
   }
   async function excluir(id: number) {
     if (window.confirm("Deseja realmente excluir esta inscrição?")) { await api.delete(`/inscricoes/${id}`); carregar(); }
