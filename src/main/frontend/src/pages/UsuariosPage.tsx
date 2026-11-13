@@ -15,5 +15,5 @@ export default function UsuariosPage() {
       carregar();
     }
   };
-  return <section><h2>Usuários</h2><UsuarioForm usuario={edicao} onSalvar={salvar} onCancelar={() => setEdicao(null)} /><UsuarioList usuarios={itens} onEditar={setEdicao} onExcluir={excluir} /></section>;
+  return <section><h1 className="mb-4 text-2xl font-bold text-gray-800">Usuários</h1><UsuarioForm usuario={edicao} onSalvar={salvar} onCancelar={() => setEdicao(null)} /><UsuarioList usuarios={itens} onEditar={setEdicao} onExcluir={excluir} /></section>;
 }

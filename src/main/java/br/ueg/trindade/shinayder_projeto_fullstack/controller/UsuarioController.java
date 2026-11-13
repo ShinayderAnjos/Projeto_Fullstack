@@ -14,6 +14,7 @@ public class UsuarioController {
 	private UsuarioService usuarioService;
 
 	@GetMapping public List<Usuario> listar() { return usuarioService.listar(); }
+	@GetMapping("/{id}") public Usuario buscar(@PathVariable Long id) { return usuarioService.buscarPorId(id); }
 	@PostMapping public Usuario salvar(@RequestBody Usuario usuario) { return usuarioService.salvar(usuario); }
 	@PutMapping("/{id}") public Usuario atualizar(@PathVariable Long id, @RequestBody Usuario usuario) { return usuarioService.atualizar(id, usuario); }
 	@DeleteMapping("/{id}") public void excluir(@PathVariable Long id) { usuarioService.excluir(id); }
