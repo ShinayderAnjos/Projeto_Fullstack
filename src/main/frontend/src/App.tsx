@@ -1,16 +1,24 @@
-import { Route, Routes } from "react-router-dom";
+import type { ReactNode } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
+import LoginPage from "./pages/LoginPage";
 import JogosPage from "./pages/JogosPage";
 import PermissoesPage from "./pages/PermissoesPage";
 import UsuarioDetailPage from "./pages/UsuarioDetailPage";
 import UsuarioPermissoesPage from "./pages/UsuarioPermissoesPage";
 import UsuariosPage from "./pages/UsuariosPage";
+import { obterToken } from "./services/auth";
+
+function RequireAuth({ children }: { children: ReactNode }) {
+  return obterToken() ? children : <Navigate to="/login" replace />;
+}
 
 function App() {
   return (
     <Routes>
-      <Route element={<Layout />}>
+      <Route path="/login" element={<LoginPage />} />
+      <Route element={<RequireAuth><Layout /></RequireAuth>}>
         <Route path="/" element={<Home />} />
         <Route path="/usuarios" element={<UsuariosPage />} />
         <Route path="/usuarios/:id" element={<UsuarioDetailPage />} />

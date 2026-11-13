@@ -2,6 +2,7 @@ package br.ueg.trindade.shinayder_projeto_fullstack.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import br.ueg.trindade.shinayder_projeto_fullstack.model.Usuario;
 import br.ueg.trindade.shinayder_projeto_fullstack.service.UsuarioService;
@@ -9,6 +10,7 @@ import br.ueg.trindade.shinayder_projeto_fullstack.service.UsuarioService;
 @RestController
 @RequestMapping("/api/usuarios")
 @CrossOrigin(origins = "http://localhost:5173")
+@PreAuthorize("hasRole('ADMIN')")
 public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
