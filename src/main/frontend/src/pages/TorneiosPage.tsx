@@ -3,8 +3,10 @@ import TorneioForm from "../components/TorneioForm";
 import TorneioList from "../components/TorneioList";
 import api from "../services/api";
 import type { Torneio } from "../types/Torneio";
+import { temPapel } from "../services/auth";
 
 function TorneiosPage() {
+  const administrador = temPapel("ADMIN");
   const [itens, setItens] = useState<Torneio[]>([]);
   const [edicao, setEdicao] = useState<Torneio | null>(null);
   const carregar = () => api.get<Torneio[]>("/torneios").then((r) => setItens(r.data));
@@ -18,6 +20,6 @@ function TorneiosPage() {
     try { await api.delete(`/torneios/${id}`); carregar(); }
     catch { alert("Não é possível excluir um torneio com inscrições."); }
   }
-  return <section><h1 className="mb-4 text-2xl font-bold text-gray-800">Torneios</h1><TorneioForm torneio={edicao} onSalvar={salvar} onCancelar={() => setEdicao(null)} /><TorneioList torneios={itens} onEditar={setEdicao} onExcluir={excluir} /></section>;
+  return <section><h1 className="mb-4 text-2xl font-bold text-gray-800">Torneios</h1>{administrador && <TorneioForm torneio={edicao} onSalvar={salvar} onCancelar={() => setEdicao(null)} />}<TorneioList torneios={itens} podeEditar={administrador} onEditar={setEdicao} onExcluir={excluir} /></section>;
 }
 export default TorneiosPage;

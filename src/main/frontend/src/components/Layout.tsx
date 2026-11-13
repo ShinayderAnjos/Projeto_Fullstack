@@ -18,7 +18,7 @@ function Layout() {
           <NavLink to="/" end className={link}>Home</NavLink>
           <NavLink to="/jogos" className={link}>Jogos</NavLink>
           <NavLink to="/torneios" className={link}>Torneios</NavLink>
-          <NavLink to="/inscricoes" className={link}>Inscrições</NavLink>
+          <NavLink to="/inscricoes" className={link}>{temPapel("ADMIN") ? "Inscrições" : "Inscrever-se"}</NavLink>
           {temPapel("ADMIN") && <>
             <NavLink to="/usuarios" className={link}>Usuários</NavLink>
             <NavLink to="/permissoes" className={link}>Permissões</NavLink>
